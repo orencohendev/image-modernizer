@@ -87,6 +87,9 @@ jobs:
       - name: List files in dist
         run: ls -l dist
 
+      - name: Delay to allow release to be created
+        run: sleep 10
+
       - name: Release
         uses: softprops/action-gh-release@v1
         env:
