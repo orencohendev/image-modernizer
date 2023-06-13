@@ -29,12 +29,11 @@ jobs:
       run: |
         poetry run pyinstaller --onefile png_to_webp_converter.py
 
-    - name: Upload Executable as Release Asset
-      uses: softprops/action-gh-release@v1
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+    - name: Upload Executable as Artifact
+      uses: actions/upload-artifact@v2
       with:
-        files: ./dist/png_to_webp_converter.exe
+        name: png_to_webp_converter.exe
+        path: ./dist/png_to_webp_converter.exe
 
   build-macos:
     runs-on: macos-latest
@@ -60,9 +59,24 @@ jobs:
       run: |
         poetry run pyinstaller --onefile png_to_webp_converter.py
 
-    - name: Upload Executable as Release Asset
-      uses: softprops/action-gh-release@v1
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+    - name: Upload Executable as Artifact
+      uses: actions/upload-artifact@v2
       with:
-        files: ./dist/png_to_webp_converter
+        name: png_to_webp_converter
+        path: ./dist/png_to_webp_converter
+
+  release:
+    needs: [build-windows, build-macos]
+    runs-on: ubuntu-latest
+    steps:
+      - name: Download Artifacts
+        uses: actions/download-artifact@v2
+        with:
+          path: dist
+
+      - name: Release
+        uses: softprops/action-gh-release@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          files: dist/*
