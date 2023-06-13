@@ -4,7 +4,6 @@ version = "0.1.0"
 description = ""
 authors = ["orencohendev <oren@orencreates.com>"]
 readme = "README.md"
-packages = [{include = "png_to_webp_converter"}]
 
 [tool.poetry.dependencies]
 python = "^3.11"
