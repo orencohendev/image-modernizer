@@ -1,0 +1,19 @@
+[tool.poetry]
+name = "png-to-webp-converter"
+version = "0.1.0"
+description = ""
+authors = ["orencohendev <oren@orencreates.com>"]
+readme = "README.md"
+packages = [{include = "png_to_webp_converter"}]
+
+[tool.poetry.dependencies]
+python = "^3.11"
+Pillow = "^9.5.0"
+
+[tool.poetry.group.dev.dependencies]
+black = "^23.3.0"
+mypy = "^1.3.0"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
