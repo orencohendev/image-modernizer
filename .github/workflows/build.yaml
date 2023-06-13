@@ -1,8 +1,8 @@
 name: Build and Release
 on:
-  push:
-    tags:
-      - '*'
+  release:
+    types:
+      - created
 
 jobs:
   build-windows:
@@ -27,14 +27,14 @@ jobs:
 
     - name: Create Executable
       run: |
-        poetry run pyinstaller --onefile png_to_webp_converter.py
+        pyinstaller --onefile png_to_webp_converter.py
 
     - name: Upload Executable as Release Asset
       uses: actions/upload-release-asset@v1
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       with:
-        upload_url: ${{ github.event.repository.releases_url }}
+        upload_url: ${{ github.event.release.upload_url }}
         asset_path: ./dist/png_to_webp_converter.exe
         asset_name: png_to_webp_converter.exe
         asset_content_type: application/octet-stream
@@ -61,14 +61,14 @@ jobs:
 
     - name: Create Executable
       run: |
-        poetry run pyinstaller --onefile png_to_webp_converter.py
+        pyinstaller --onefile png_to_webp_converter.py
 
     - name: Upload Executable as Release Asset
       uses: actions/upload-release-asset@v1
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       with:
-        upload_url: ${{ github.event.repository.releases_url }}
+        upload_url: ${{ github.event.release.upload_url }}
         asset_path: ./dist/png_to_webp_converter
         asset_name: png_to_webp_converter
         asset_content_type: application/octet-stream
