@@ -27,7 +27,7 @@ jobs:
 
     - name: Create Executable
       run: |
-        pyinstaller --onefile png_to_webp_converter.py
+        poetry run pyinstaller --onefile png_to_webp_converter.py
 
     - name: Upload Executable as Release Asset
       uses: actions/upload-release-asset@v1
@@ -61,7 +61,7 @@ jobs:
 
     - name: Create Executable
       run: |
-        pyinstaller --onefile png_to_webp_converter.py
+        poetry run pyinstaller --onefile png_to_webp_converter.py
 
     - name: Upload Executable as Release Asset
       uses: actions/upload-release-asset@v1
