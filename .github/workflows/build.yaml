@@ -69,12 +69,23 @@ jobs:
     needs: [build-windows, build-macos]
     runs-on: ubuntu-latest
     steps:
-      - name: List files in dist
-        run: ls -l dist
-      - name: Download Artifacts
+      - name: Create dist directory
+        run: mkdir dist
+
+      - name: Download Windows Artifact
         uses: actions/download-artifact@v2
         with:
+          name: png_to_webp_converter.exe
           path: dist
+
+      - name: Download MacOS Artifact
+        uses: actions/download-artifact@v2
+        with:
+          name: png_to_webp_converter
+          path: dist
+
+      - name: List files in dist
+        run: ls -l dist
 
       - name: Release
         uses: softprops/action-gh-release@v1
