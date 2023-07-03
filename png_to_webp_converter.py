@@ -30,7 +30,7 @@ class Application(tk.Frame):
         self.progress = ttk.Progressbar(self, length=200, mode='indeterminate')
 
     def open_file_dialog(self):
-        filepath = filedialog.askopenfilename(filetypes=[("PNG Files", "*.png")])
+        filepath = filedialog.askopenfilename(filetypes=[("PNG Files", "*.png"), ("JPEG Files", "*.jpg"), ("JPEG Files", "*.jpeg")])
         if filepath:
             self.progress.pack(side="bottom")
             self.progress.start()
