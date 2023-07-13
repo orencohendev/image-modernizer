@@ -1,5 +1,8 @@
 name: Build and Release
 on:
+  push:
+    branches:
+      - '**'
   release:
     types:
       - created
@@ -76,6 +79,7 @@ jobs:
         path: ./output/*
 
   release:
+    if: github.event_name == 'release'
     needs: [build-windows, build-macos]
     runs-on: ubuntu-latest
     steps:
