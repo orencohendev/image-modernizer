@@ -1,7 +1,7 @@
 import os
 import tkinter as tk
 from tkinter import filedialog, messagebox as alert
-from tkinter import ttk
+from ttkbootstrap import Style, ttk
 from PIL import Image
 from threading import Thread
 import time
@@ -24,11 +24,11 @@ class Application(tk.Frame):
         self.empty_line = tk.Label(self, text="")
         self.empty_line.grid(row=2, column=0, columnspan=2, padx=10, pady=10)
 
-        self.browse = tk.Button(self, text="Browse", font=("Arial", 20), height=2, width=10)
+        self.browse = ttk.Button(self, text="Browse", style='info.TButton')
         self.browse["command"] = self.open_file_dialog
         self.browse.grid(row=3, column=0, padx=10, pady=10)
 
-        self.exit = tk.Button(self, text="Exit", font=("Arial", 20), height=2, width=10)
+        self.exit = ttk.Button(self, text="Exit", style='danger.TButton')
         self.exit["command"] = self.exit_gracefully
         self.exit.grid(row=3, column=1, padx=10, pady=10)
 
@@ -37,7 +37,6 @@ class Application(tk.Frame):
     def exit_gracefully(self):
         self.master.destroy()
 
-
     def open_file_dialog(self):
         filepath = filedialog.askopenfilename(filetypes=[("PNG Files", "*.png"), ("JPEG Files", "*.jpg"), ("JPEG Files", "*.jpeg")])
         if filepath:
@@ -45,12 +44,10 @@ class Application(tk.Frame):
             self.progress.start()
             Thread(target=self.convert_image, args=(filepath,)).start()
 
-
     def get_filename_without_extension(self, path):
         base_name = os.path.basename(path)  # Get the filename from path
         file_name_without_ext = os.path.splitext(base_name)[0]  # Get the filename without extension
         return file_name_without_ext
-
 
     def convert_image(self, filepath):
         try:
@@ -67,7 +64,8 @@ class Application(tk.Frame):
             alert.showerror(title="Conversion Failed!",message=f"Error occurred while converting image: {str(e)}")
 
 def run():
-    root = tk.Tk()
+    style = Style(theme='darkly')
+    root = style.master
     app = Application(master=root)
     app.mainloop()
 
