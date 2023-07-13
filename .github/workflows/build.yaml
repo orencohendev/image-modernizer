@@ -109,12 +109,12 @@ jobs:
     - name: Upload Executable as Artifact
       uses: actions/upload-artifact@v2
       with:
-        name: macos-artifact
+        name: linux-artifact
         path: ./output/*
 
   release:
     if: github.event_name == 'release'
-    needs: [build-windows, build-macos]
+    needs: [build-windows, build-macos, build-linux]
     runs-on: ubuntu-latest
     steps:
       - name: Create dist directory
@@ -130,6 +130,12 @@ jobs:
         uses: actions/download-artifact@v2
         with:
           name: macos-artifact
+          path: dist
+
+      - name: Download Linux Artifact
+        uses: actions/download-artifact@v2
+        with:
+          name: linux-artifact
           path: dist
 
       - name: List files in dist
