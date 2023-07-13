@@ -27,13 +27,18 @@ jobs:
 
     - name: Create Executable
       run: |
-        poetry run pyinstaller --onefile png_to_webp_converter.py
+        poetry run pyinstaller --noconsole --onefile image_modernizer.py
+
+    - name: Move Executable to output directory
+      run: |
+        mkdir output
+        mv ./dist/image_modernizer.exe ./output
 
     - name: Upload Executable as Artifact
       uses: actions/upload-artifact@v2
       with:
-        name: png_to_webp_converter.exe
-        path: ./dist/png_to_webp_converter.exe
+        name: windows-artifact
+        path: ./output/*
 
   build-macos:
     runs-on: macos-latest
@@ -57,13 +62,18 @@ jobs:
 
     - name: Create Executable
       run: |
-        poetry run pyinstaller --noconsole --onefile png_to_webp_converter.py
+        poetry run pyinstaller --noconsole --onefile image_modernizer.py
+
+    - name: Move Executable to output directory
+      run: |
+        mkdir output
+        mv ./dist/image_modernizer ./output
 
     - name: Upload Executable as Artifact
       uses: actions/upload-artifact@v2
       with:
-        name: png_to_webp_converter
-        path: ./dist/png_to_webp_converter
+        name: macos-artifact
+        path: ./output/*
 
   release:
     needs: [build-windows, build-macos]
@@ -75,13 +85,13 @@ jobs:
       - name: Download Windows Artifact
         uses: actions/download-artifact@v2
         with:
-          name: png_to_webp_converter.exe
+          name: windows-artifact
           path: dist
 
       - name: Download MacOS Artifact
         uses: actions/download-artifact@v2
         with:
-          name: png_to_webp_converter
+          name: macos-artifact
           path: dist
 
       - name: List files in dist
