@@ -368,6 +368,21 @@ testing = ["build[virtualenv]", "filelock (>=3.4.0)", "flake8-2020", "ini2toml[l
 testing-integration = ["build[virtualenv]", "filelock (>=3.4.0)", "jaraco.envs (>=2.2)", "jaraco.path (>=3.2.0)", "pytest", "pytest-enabler", "pytest-xdist", "tomli", "virtualenv (>=13.0.0)", "wheel"]
 
 [[package]]
+name = "ttkbootstrap"
+version = "1.10.1"
+description = "A supercharged theme extension for tkinter that enables on-demand modern flat style themes inspired by Bootstrap."
+category = "main"
+optional = false
+python-versions = ">=3.7"
+files = [
+    {file = "ttkbootstrap-1.10.1-py3-none-any.whl", hash = "sha256:c6a10ee5ea64051a0f8b75c20ef8e5f2417c62b4d0858c831683d4f2135aa573"},
+    {file = "ttkbootstrap-1.10.1.tar.gz", hash = "sha256:53925525c4104f9e345627500dced2d0392ad74324b2a81467aaee3ffbe1a474"},
+]
+
+[package.dependencies]
+pillow = ">=8.2.0"
+
+[[package]]
 name = "typing-extensions"
 version = "4.6.3"
 description = "Backported and Experimental Type Hints for Python 3.7+"
@@ -382,4 +397,4 @@ files = [
 [metadata]
 lock-version = "2.0"
 python-versions = ">=3.11,<3.12"
-content-hash = "f97b2f3232701702f0ce4a386b02f3fa91ea9fcd53b2ea0068bb4613d7ca7cfc"
+content-hash = "b51df0a9b00859bf244e614bbde004cdcbe08e4aa0d5cd1e493316c02c3d3003"
