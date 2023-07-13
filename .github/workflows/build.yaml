@@ -43,6 +43,17 @@ jobs:
         name: image_modernizer_installer.exe
         path: ./Image_Modernizer_Installer.exe
 
+    - name: Move Executable to output directory
+      run: |
+        mkdir output
+        mv ./Image_Modernizer_Installer.exe ./output
+
+    - name: Upload Executable as Artifact
+      uses: actions/upload-artifact@v2
+      with:
+        name: windows-artifact
+        path: ./output/*
+
   build-macos:
     runs-on: macos-latest
 
