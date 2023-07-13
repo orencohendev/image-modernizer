@@ -11,7 +11,7 @@ class Application(tk.Frame):
         super().__init__(master)
         self.master = master
         self.master.title("Welcome to Image Modernizer")
-        self.pack()
+        self.grid()
         self.create_widgets()
 
     def create_widgets(self):
@@ -41,7 +41,7 @@ class Application(tk.Frame):
     def open_file_dialog(self):
         filepath = filedialog.askopenfilename(filetypes=[("PNG Files", "*.png"), ("JPEG Files", "*.jpg"), ("JPEG Files", "*.jpeg")])
         if filepath:
-            self.progress.pack(side="bottom")
+            self.progress.grid(row=4, column=0, columnspan=2, padx=10, pady=10)
             self.progress.start()
             Thread(target=self.convert_image, args=(filepath,)).start()
 
@@ -58,7 +58,7 @@ class Application(tk.Frame):
 
             time.sleep(1)  # Simulate processing time.
             self.progress.stop()
-            self.progress.pack_forget()
+            self.progress.grid_forget()
             save_path = filedialog.asksaveasfilename(initialfile=self.get_filename_without_extension(filepath),defaultextension=".webp", filetypes=[("WebP Files", "*.webp")])
             if save_path:
                 img.save(save_path, "WEBP")
