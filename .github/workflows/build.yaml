@@ -57,7 +57,7 @@ jobs:
 
     - name: Create Executable
       run: |
-        poetry run pyinstaller --onefile png_to_webp_converter.py
+        poetry run pyinstaller --noconsole --onefile png_to_webp_converter.py
 
     - name: Upload Executable as Artifact
       uses: actions/upload-artifact@v2

@@ -1,5 +1,6 @@
+import os
 import tkinter as tk
-from tkinter import filedialog
+from tkinter import filedialog, messagebox as alert
 from tkinter import ttk
 from PIL import Image
 from threading import Thread
@@ -36,18 +37,26 @@ class Application(tk.Frame):
             self.progress.start()
             Thread(target=self.convert_image, args=(filepath,)).start()
 
+
+    def get_filename_without_extension(self, path):
+        base_name = os.path.basename(path)  # Get the filename from path
+        file_name_without_ext = os.path.splitext(base_name)[0]  # Get the filename without extension
+        return file_name_without_ext
+
+
     def convert_image(self, filepath):
         try:
             img = Image.open(filepath)
+
             time.sleep(1)  # Simulate processing time.
             self.progress.stop()
             self.progress.pack_forget()
-            save_path = filedialog.asksaveasfilename(defaultextension=".webp", filetypes=[("WebP Files", "*.webp")])
+            save_path = filedialog.asksaveasfilename(initialfile=self.get_filename_without_extension(filepath),defaultextension=".webp", filetypes=[("WebP Files", "*.webp")])
             if save_path:
                 img.save(save_path, "WEBP")
-                print("Image converted and saved successfully.")
+                alert.showinfo(title="Conversion Complete!",message="Image converted and saved successfully.")
         except Exception as e:
-            print("Error occurred while converting image: ", str(e))
+            alert.showerror(title="Conversion Failed!",message=f"Error occurred while converting image: {str(e)}")
 
 def run():
     root = tk.Tk()
