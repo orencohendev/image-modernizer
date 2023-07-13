@@ -15,10 +15,10 @@ class Application(tk.Frame):
         self.create_widgets()
 
     def create_widgets(self):
-        self.title = tk.Label(self, text="Welcome to Image Modernizer", font=("Arial", 20))
+        self.title = tk.Label(self, text="Welcome to Image Modernizer", font=("Open Sans", 20))
         self.title.grid(row=0, column=0, columnspan=2, padx=10, pady=10)
 
-        self.subtitle = tk.Label(self, text="Please click the Browse button to select the\n file you want to modernize or click exit.", font=("Arial", 14))
+        self.subtitle = tk.Label(self, text="Please click the Browse button to select the\n file you want to modernize or click exit.", font=("Open Sans", 14))
         self.subtitle.grid(row=1, column=0, columnspan=2, padx=10, pady=10)
         
         self.empty_line = tk.Label(self, text="")
