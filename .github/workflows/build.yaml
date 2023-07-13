@@ -1,8 +1,5 @@
 name: Build and Release
 on:
-  push:
-    branches:
-      - '**'
   release:
     types:
       - created
