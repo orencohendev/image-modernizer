@@ -5,7 +5,7 @@ on:
       - created
 
 jobs:
-  build-windows:
+    build-windows:
     runs-on: windows-latest
 
     steps:
@@ -29,16 +29,19 @@ jobs:
       run: |
         poetry run pyinstaller --noconsole --onefile image_modernizer.py
 
-    - name: Move Executable to output directory
+    - name: Download NSIS
       run: |
-        mkdir output
-        mv ./dist/image_modernizer.exe ./output
+        choco install -y nsis
+
+    - name: Create Installer with NSIS
+      run: |
+        makensis installer.nsi
 
     - name: Upload Executable as Artifact
       uses: actions/upload-artifact@v2
       with:
-        name: windows-artifact
-        path: ./output/*
+        name: image_modernizer_installer.exe
+        path: ./Image_Modernizer_Installer.exe
 
   build-macos:
     runs-on: macos-latest
