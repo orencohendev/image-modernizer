@@ -14,7 +14,7 @@ There's absolutely no guarantee that website owners don't keep your images. They
 So, I decided to build my own open source converter. This is a desktop app that makes no requests to the internet and uses a very simple UI to convert your local images to WEBP - a modern image format that googlebot would love to see when it scans your website.
 
 ## How to use Image Modernizer?
-Go to the releases page and download the software from the latest release.
+Go to the [releases](https://github.com/orencohendev/image-modernizer/releases) page and download the software from the latest release.
 Three platforms are currently supported: Windows, MacOS, and Linux.
 Run Image Modernizer on the system you're using and you'll see a simple UI with a "Browse" button.
 Select your PNG or JPEG image and let Image Modernizer do the rest. When done, it will ask you to select the destination for the new Webp copy of your image.
