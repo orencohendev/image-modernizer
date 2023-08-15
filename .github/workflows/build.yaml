@@ -93,7 +93,7 @@ jobs:
 
   release:
     if: github.event_name == 'release'
-    needs: [build-windows, build-macos, build-linux]
+    needs: [build-windows, build-linux]
     runs-on: ubuntu-latest
     steps:
       - name: Create dist directory
@@ -103,12 +103,6 @@ jobs:
         uses: actions/download-artifact@v2
         with:
           name: windows-artifact
-          path: dist
-
-      - name: Download MacOS Artifact
-        uses: actions/download-artifact@v2
-        with:
-          name: macos-artifact
           path: dist
 
       - name: Download Linux Artifact
