@@ -87,8 +87,8 @@ jobs:
     
     - name: Sign App
       run: |
-        echo "$MAC_CERTIFICATE_PEM" > certificate.pem
-        echo "$MAC_PRIVATE_KEY_PEM" > private_key.pem
+        echo "${{ secrets.MAC_CERTIFICATE_PEM}}" > certificate.pem
+        echo "${{ secrets.MAC_PRIVATE_KEY_PEM }}" > private_key.pem
         codesign --force --deep --sign "Developer ID Application: Oren Cohen" dist/image_modernizer.app
 
     - name: Move Executable to output directory
