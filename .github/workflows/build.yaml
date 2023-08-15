@@ -79,7 +79,7 @@ jobs:
 
     - name: Create Executable
       run: |
-        poetry run pyinstaller --noconsole --onefile image_modernizer.py
+        poetry run pyinstaller --noconsole --onefile --add-data '/usr/local/Cellar/python/3.11/Python:tcl' image_modernizer.py
 
     - name: Move Executable to output directory
       run: |
