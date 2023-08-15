@@ -97,7 +97,7 @@ jobs:
 
     - name: Sign App
       run: |
-        codesign --force --deep --sign "Developer ID Application: Oren Cohen" dist/image_modernizer.app
+        codesign --sign "Developer ID Application: Oren Cohen" dist/image_modernizer.app
 
     - name: Move Executable to output directory
       run: |
