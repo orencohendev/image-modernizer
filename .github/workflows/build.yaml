@@ -88,7 +88,7 @@ jobs:
     - name: Move Executable to output directory
       run: |
         mkdir output
-        mv ./dist/image_modernizer ./output/image_modernizer_macos
+        mv ./dist/* ./output/
 
     - name: Upload Executable as Artifact
       uses: actions/upload-artifact@v2
