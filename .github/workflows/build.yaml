@@ -3,9 +3,6 @@ on:
   release:
     types:
       - created
-  push:  # Add this section for branch pushes
-    branches:
-      - 4-mac-version-does-not-launch 
 
 jobs:
   build-windows:
