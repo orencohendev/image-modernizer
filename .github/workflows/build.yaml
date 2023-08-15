@@ -85,10 +85,18 @@ jobs:
       run: |
         poetry run pyinstaller --noconsole --onefile image_modernizer.py
     
+    - name: Import Certificate to Keychain
+      run: |
+        echo "${{ secrets.MAC_CERTIFICATE_PEM }}" > certificate.pem
+        security import certificate.pem -k "$HOME/Library/Keychains/login.keychain-db" 
+
+    - name: Import Private Key to Keychain
+      run: |
+        echo "${{ secrets.MAC_PRIVATE_KEY_PEM }}" > private_key.pem
+        security import private_key.pem -k "$HOME/Library/Keychains/login.keychain-db"
+
     - name: Sign App
       run: |
-        echo "${{ secrets.MAC_CERTIFICATE_PEM}}" > certificate.pem
-        echo "${{ secrets.MAC_PRIVATE_KEY_PEM }}" > private_key.pem
         codesign --force --deep --sign "Developer ID Application: Oren Cohen" dist/image_modernizer.app
 
     - name: Move Executable to output directory
