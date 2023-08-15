@@ -83,7 +83,13 @@ jobs:
 
     - name: Create Executable
       run: |
-        poetry run pyinstaller --noconsole --onefile --osx-sign "$MAC_CERTIFICATE_PEM" --osx-sign-identity "Oren Cohen" image_modernizer.py
+        poetry run pyinstaller --noconsole --onefile image_modernizer.py
+    
+    - name: Sign App
+      run: |
+        echo "$MAC_CERTIFICATE_PEM" > certificate.pem
+        echo "$MAC_PRIVATE_KEY_PEM" > private_key.pem
+        codesign --force --deep --sign "Developer ID Application: Oren Cohen" dist/image_modernizer.app
 
     - name: Move Executable to output directory
       run: |
