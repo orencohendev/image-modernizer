@@ -53,8 +53,8 @@ class Application(tk.Frame):
             ]
         )
         if filepath:
-            self.progress.grid(row=4, column=0, columnspan=2, padx=10, pady=10)
-            self.progress.start()
+            # self.progress.grid(row=4, column=0, columnspan=2, padx=10, pady=10)
+            # self.progress.start()
             Thread(target=self.convert_image, args=(filepath,)).start()
 
     def get_filename_without_extension(self, path):
@@ -69,8 +69,8 @@ class Application(tk.Frame):
             img = Image.open(filepath)
 
             time.sleep(1)  # Simulate processing time.
-            self.progress.stop()
-            self.progress.grid_forget()
+            # self.progress.stop()
+            # self.progress.grid_forget()
             save_path = filedialog.asksaveasfilename(
                 initialfile=self.get_filename_without_extension(filepath),
                 defaultextension=".webp",
